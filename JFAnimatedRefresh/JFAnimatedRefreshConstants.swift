@@ -1,5 +1,5 @@
 //
-//  JFRefreshConstants.swift
+//  JFAnimatedRefreshConstants.swift
 //  JFAnimatedRefreshExample
 //
 //  Created by JonyFang on 2017/9/12.
@@ -8,7 +8,7 @@
 
 import CoreGraphics
 
-public struct JFRefreshConstants {
+public struct JFAnimatedRefreshConstants {
     
     struct KeyPaths {
         static let ContentOffset = "contentOffset"
