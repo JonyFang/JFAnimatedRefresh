@@ -14,6 +14,7 @@
 		D30872FD1F669202005E500F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D30872FB1F669202005E500F /* LaunchScreen.storyboard */; };
 		D30873061F669338005E500F /* JFRefreshLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30873051F669338005E500F /* JFRefreshLoadingView.swift */; };
 		D30873081F6772ED005E500F /* JFRefreshLoadingCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30873071F6772ED005E500F /* JFRefreshLoadingCircle.swift */; };
+		D308730A1F678332005E500F /* JFRefreshConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30873091F678332005E500F /* JFRefreshConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		D30872FE1F669202005E500F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D30873051F669338005E500F /* JFRefreshLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JFRefreshLoadingView.swift; path = JFAnimatedRefresh/JFRefreshLoadingView.swift; sourceTree = SOURCE_ROOT; };
 		D30873071F6772ED005E500F /* JFRefreshLoadingCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JFRefreshLoadingCircle.swift; path = JFAnimatedRefresh/JFRefreshLoadingCircle.swift; sourceTree = SOURCE_ROOT; };
+		D30873091F678332005E500F /* JFRefreshConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JFRefreshConstants.swift; path = JFAnimatedRefresh/JFRefreshConstants.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			children = (
 				D30873051F669338005E500F /* JFRefreshLoadingView.swift */,
 				D30873071F6772ED005E500F /* JFRefreshLoadingCircle.swift */,
+				D30873091F678332005E500F /* JFRefreshConstants.swift */,
 			);
 			path = JFAnimatedRefresh;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D308730A1F678332005E500F /* JFRefreshConstants.swift in Sources */,
 				D30873061F669338005E500F /* JFRefreshLoadingView.swift in Sources */,
 				D30872F51F669202005E500F /* ViewController.swift in Sources */,
 				D30873081F6772ED005E500F /* JFRefreshLoadingCircle.swift in Sources */,
