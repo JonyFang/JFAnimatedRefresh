@@ -13,7 +13,7 @@
 		D30872FA1F669202005E500F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30872F91F669202005E500F /* Assets.xcassets */; };
 		D30872FD1F669202005E500F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D30872FB1F669202005E500F /* LaunchScreen.storyboard */; };
 		D30873061F669338005E500F /* JFRefreshLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30873051F669338005E500F /* JFRefreshLoadingView.swift */; };
-		D30873081F6772ED005E500F /* JFRefreshLoadingCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30873071F6772ED005E500F /* JFRefreshLoadingCircle.swift */; };
+		D30873081F6772ED005E500F /* JFAnimatedRefreshLoadingCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30873071F6772ED005E500F /* JFAnimatedRefreshLoadingCircle.swift */; };
 		D308730A1F678332005E500F /* JFAnimatedRefreshConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30873091F678332005E500F /* JFAnimatedRefreshConstants.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,7 +26,7 @@
 		D30872FC1F669202005E500F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D30872FE1F669202005E500F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D30873051F669338005E500F /* JFRefreshLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JFRefreshLoadingView.swift; path = JFAnimatedRefresh/JFRefreshLoadingView.swift; sourceTree = SOURCE_ROOT; };
-		D30873071F6772ED005E500F /* JFRefreshLoadingCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JFRefreshLoadingCircle.swift; path = JFAnimatedRefresh/JFRefreshLoadingCircle.swift; sourceTree = SOURCE_ROOT; };
+		D30873071F6772ED005E500F /* JFAnimatedRefreshLoadingCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JFAnimatedRefreshLoadingCircle.swift; path = JFAnimatedRefresh/JFAnimatedRefreshLoadingCircle.swift; sourceTree = SOURCE_ROOT; };
 		D30873091F678332005E500F /* JFAnimatedRefreshConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JFAnimatedRefreshConstants.swift; path = JFAnimatedRefresh/JFAnimatedRefreshConstants.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -75,7 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				D30873051F669338005E500F /* JFRefreshLoadingView.swift */,
-				D30873071F6772ED005E500F /* JFRefreshLoadingCircle.swift */,
+				D30873071F6772ED005E500F /* JFAnimatedRefreshLoadingCircle.swift */,
 				D30873091F678332005E500F /* JFAnimatedRefreshConstants.swift */,
 			);
 			path = JFAnimatedRefresh;
@@ -157,7 +157,7 @@
 				D308730A1F678332005E500F /* JFAnimatedRefreshConstants.swift in Sources */,
 				D30873061F669338005E500F /* JFRefreshLoadingView.swift in Sources */,
 				D30872F51F669202005E500F /* ViewController.swift in Sources */,
-				D30873081F6772ED005E500F /* JFRefreshLoadingCircle.swift in Sources */,
+				D30873081F6772ED005E500F /* JFAnimatedRefreshLoadingCircle.swift in Sources */,
 				D30872F31F669202005E500F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,5 +1,5 @@
 //
-//  JFRefreshLoadingCircle.swift
+//  JFAnimatedRefreshLoadingCircle.swift
 //  JFAnimatedRefreshExample
 //
 //  Created by JonyFang on 2017/9/12.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class JFRefreshLoadingCircle: JFRefreshLoadingView {
+open class JFAnimatedRefreshLoadingCircle: JFRefreshLoadingView {
     
     //MARK: - Properties
     fileprivate let shapeLayer = CAShapeLayer()
