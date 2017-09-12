@@ -1,5 +1,5 @@
 //
-//  JFRefreshLoadingView.swift
+//  JFAnimatedRefreshLoadingView.swift
 //  JFAnimatedRefreshExample
 //
 //  Created by JonyFang on 2017/9/11.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class JFRefreshLoadingView: UIView {
+open class JFAnimatedRefreshLoadingView: UIView {
     
     //MARK: - Life Cycle
     public init() {

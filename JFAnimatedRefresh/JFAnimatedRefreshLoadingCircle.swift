@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class JFAnimatedRefreshLoadingCircle: JFRefreshLoadingView {
+open class JFAnimatedRefreshLoadingCircle: JFAnimatedRefreshLoadingView {
     
     //MARK: - Properties
     fileprivate let shapeLayer = CAShapeLayer()
