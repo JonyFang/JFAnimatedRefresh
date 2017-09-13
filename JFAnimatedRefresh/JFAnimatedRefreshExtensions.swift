@@ -62,3 +62,51 @@ public extension UIGestureRecognizerState {
         return values.contains(where: {$0 == self})
     }
 }
+
+public extension UIScrollView {
+    //MARK: - Public
+    public func jf_addPullToRefreshWithHandler(_ handler: @escaping () -> Void, loadingView: JFAnimatedRefreshLoadingView?) {
+        isMultipleTouchEnabled = false
+        panGestureRecognizer.maximumNumberOfTouches = 1
+        
+        let pullToRefreshView = JFAnimatedRefresh()
+        pullToRefreshView.actionHandler = handler
+        pullToRefreshView.loadingView = loadingView
+        self.pullToRefreshView = pullToRefreshView
+        addSubview(pullToRefreshView)
+        
+        pullToRefreshView.observing = true
+    }
+    
+    public func jf_removePullToRefresh() {
+        pullToRefreshView?.disassociateDisplayLink()
+        pullToRefreshView?.observing = false
+        pullToRefreshView?.removeFromSuperview()
+    }
+    
+    public func jf_setPullToRefreshBackgroundColor(_ color: UIColor) {
+        pullToRefreshView?.backgroundColor = color
+    }
+    
+    public func jf_setPullToRefreshFillColor(_ color: UIColor) {
+        pullToRefreshView?.fillColor = color
+    }
+    
+    public func jf_stopLoading() {
+        pullToRefreshView?.stopLoading()
+    }
+    
+    //MARK: - Private
+    fileprivate struct jf_associatedKeys {
+        static var pullToRefreshView = "pullToRefreshView"
+    }
+    
+    fileprivate var pullToRefreshView: JFAnimatedRefresh? {
+        get {
+            return objc_getAssociatedObject(self, &jf_associatedKeys.pullToRefreshView) as? JFAnimatedRefresh
+        }
+        set {
+            objc_setAssociatedObject(self, &jf_associatedKeys.pullToRefreshView, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+}
