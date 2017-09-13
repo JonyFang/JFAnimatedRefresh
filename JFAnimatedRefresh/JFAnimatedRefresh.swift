@@ -57,7 +57,7 @@ open class JFAnimatedRefresh: UIView {
     }
     
     var actionHandler:(() -> Void)!
-    fileprivate let shapLayer = CAShapeLayer()
+    fileprivate let shapeLayer = CAShapeLayer()
     fileprivate var displayLink: CADisplayLink!
     
     fileprivate var originalContentInsetTop: CGFloat = 0.0 {
@@ -88,7 +88,7 @@ open class JFAnimatedRefresh: UIView {
     
     var fillColor: UIColor = .clear {
         didSet {
-            shapLayer.fillColor = fillColor.cgColor
+            shapeLayer.fillColor = fillColor.cgColor
         }
     }
     
@@ -108,10 +108,10 @@ open class JFAnimatedRefresh: UIView {
         displayLink.add(to: .main, forMode: .commonModes)
         displayLink.isPaused = true
         
-        shapLayer.backgroundColor = UIColor.clear.cgColor
-        shapLayer.fillColor = UIColor.black.cgColor
-        shapLayer.actions = ["path": NSNull(), "position": NSNull(), "bounds": NSNull()]
-        layer.addSublayer(shapLayer)
+        shapeLayer.backgroundColor = UIColor.clear.cgColor
+        shapeLayer.fillColor = UIColor.black.cgColor
+        shapeLayer.actions = ["path": NSNull(), "position": NSNull(), "bounds": NSNull()]
+        layer.addSublayer(shapeLayer)
         
         addSubview(bounceAnimationHelperView)
         addSubview(cControlPointView)
@@ -155,10 +155,10 @@ open class JFAnimatedRefresh: UIView {
                 let waveHeight = currentWaveHeight()
                 let baseHeight = bounds.height - waveHeight
                 
-                let minleftX = min((locationX - width * 0.5) * 0.28, 0.0)
+                let minLeftX = min((locationX - width * 0.5) * 0.28, 0.0)
                 let maxRightX = max(width + (locationX - width * 0.5) * 0.28, width)
                 
-                let lefPartWidth = locationX - minleftX
+                let leftPartWidth = locationX - minLeftX
                 let rightPartWidth = maxRightX - locationX
                 
                 cControlPointView.center = CGPoint(x: locationX, y: baseHeight + waveHeight * 1.36)
@@ -334,8 +334,8 @@ open class JFAnimatedRefresh: UIView {
             height = actualContentOffsetY()
         }
         
-        shapLayer.frame = CGRect(x: 0.0, y: 0.0, width: width, height: height)
-        shapLayer.path = currentPath()
+        shapeLayer.frame = CGRect(x: 0.0, y: 0.0, width: width, height: height)
+        shapeLayer.path = currentPath()
     }
     
     fileprivate func startDisplayLink() {
@@ -396,8 +396,8 @@ open class JFAnimatedRefresh: UIView {
         let originY: CGFloat = max(min((height - loadingViewSize) * 0.5, minOriginY), 0.0)
         
         loadingView?.frame = CGRect(x: (width - loadingViewSize) * 0.5, y: originY, width: loadingViewSize, height: loadingViewSize)
-        loadingView?.maskLayer.frame = convert(shapLayer.frame, to: loadingView)
-        loadingView?.maskLayer.path = shapLayer.path
+        loadingView?.maskLayer.frame = convert(shapeLayer.frame, to: loadingView)
+        loadingView?.maskLayer.path = shapeLayer.path
     }
     
 }
