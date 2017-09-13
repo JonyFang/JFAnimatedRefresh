@@ -155,7 +155,7 @@ open class JFAnimatedRefresh: UIView {
                 let waveHeight = currentWaveHeight()
                 let baseHeight = bounds.height - waveHeight
                 
-                let minleftX = min((locationX - width * 0.5) * 0.28, 0.0)
+                let minLeftX = min((locationX - width * 0.5) * 0.28, 0.0)
                 let maxRightX = max(width + (locationX - width * 0.5) * 0.28, width)
                 
                 let lefPartWidth = locationX - minleftX
