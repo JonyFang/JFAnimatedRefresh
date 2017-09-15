@@ -16,7 +16,7 @@ open class JFAnimatedRefreshLoadingCircle: JFAnimatedRefreshLoadingView {
     
     fileprivate lazy var identityTransform: CATransform3D = {
         var transform = CATransform3DIdentity
-        transform.m34 = CGFloat(1.0 / 500)
+        transform.m34 = CGFloat(1.0 / -500)
         transform = CATransform3DRotate(transform, CGFloat(-90.0).toRadius(), 0.0, 0.0, 1.0)
         return transform
     }()
@@ -65,7 +65,7 @@ open class JFAnimatedRefreshLoadingCircle: JFAnimatedRefreshLoadingView {
         super.updatePullProgress(progress)
         shapeLayer.strokeEnd = min(0.96 * progress, 0.96)
         if progress > 1.0 {
-            let degrees = (progress - 1.0) * 200
+            let degrees = (progress - 1.0) * 200.0
             shapeLayer.transform = CATransform3DRotate(identityTransform, degrees.toRadius(), 0.0, 0.0, 1.0)
         }
         else {

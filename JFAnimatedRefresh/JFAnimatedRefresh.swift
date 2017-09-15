@@ -25,21 +25,22 @@ open class JFAnimatedRefresh: UIView {
     //MARK: - Properties
     fileprivate var _state: JFAnimatedRefreshState = .stopped
     fileprivate var state: JFAnimatedRefreshState {
-        get {
-            return _state
-        }
+        get { return _state }
         set {
             let previousValue = state
             _state = newValue
             if previousValue == .dragging && newValue == .animatingBounce {
                 loadingView?.startAnimation()
-                //
+                animateBounce()
             }
             else if newValue == .loading && actionHandler != nil {
                 actionHandler()
             }
             else if newValue == .animatingToStopped {
-                //
+                resetScrollViewContentInset(shouldAddObserverWhenFinished: true, animated: true, completion: { 
+                    [weak self] () -> () in
+                    self?.state = .stopped
+                })
             }
             else if newValue == .stopped {
                 loadingView?.stopLoading()
@@ -56,7 +57,7 @@ open class JFAnimatedRefresh: UIView {
         }
     }
     
-    var actionHandler:(() -> Void)!
+    var actionHandler: (() -> Void)!
     fileprivate let shapeLayer = CAShapeLayer()
     fileprivate var displayLink: CADisplayLink!
     
@@ -66,12 +67,12 @@ open class JFAnimatedRefresh: UIView {
         }
     }
     
-    var observing: Bool = false {
+    var isObserving: Bool = false {
         didSet {
             guard let scrollView = scrollView() else {
                 return
             }
-            if observing {
+            if isObserving {
                 scrollView.jf_addObserver(self, forKeyPath: JFAnimatedRefreshConstants.KeyPaths.ContentOffset)
                 scrollView.jf_addObserver(self, forKeyPath: JFAnimatedRefreshConstants.KeyPaths.ContentInset)
                 scrollView.jf_addObserver(self, forKeyPath: JFAnimatedRefreshConstants.KeyPaths.Frame)
@@ -130,7 +131,7 @@ open class JFAnimatedRefresh: UIView {
     }
     
     deinit {
-        observing = false
+        isObserving = false
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -225,7 +226,7 @@ open class JFAnimatedRefresh: UIView {
         contentInset.top = originalContentInsetTop
         
         if state == .animatingBounce {
-            contentInset.top += JFAnimatedRefreshConstants.LoadingContentInset
+            contentInset.top += currentHeight()
         }
         else if state == .loading {
             contentInset.top += JFAnimatedRefreshConstants.LoadingContentInset
@@ -237,7 +238,7 @@ open class JFAnimatedRefresh: UIView {
             scrollView.contentInset = contentInset
         }
         let completionBlock = { () -> Void in
-            if  shouldAddObserverWhenFinished && self.observing {
+            if shouldAddObserverWhenFinished && self.isObserving {
                 scrollView.jf_addObserver(self, forKeyPath: JFAnimatedRefreshConstants.KeyPaths.ContentInset)
             }
             completion?()
@@ -315,6 +316,7 @@ open class JFAnimatedRefresh: UIView {
         bezierPath.addCurve(to: r1ControlPointView.jf_center(animating), controlPoint1: cControlPointView.jf_center(animating), controlPoint2: r1ControlPointView.jf_center(animating))
         bezierPath.addCurve(to: r3ControlPointView.jf_center(animating), controlPoint1: r1ControlPointView.jf_center(animating), controlPoint2: r2ControlPointView.jf_center(animating))
         bezierPath.addLine(to: CGPoint(x: width, y: 0.0))
+        bezierPath.close()
         
         return bezierPath.cgPath
     }
@@ -328,7 +330,7 @@ open class JFAnimatedRefresh: UIView {
             scrollView.contentOffset.y = -scrollView.contentInset.top
             
             height = scrollView.contentInset.top - originalContentInsetTop
-            frame = CGRect(x: 0.0, y: 0.0, width: width, height: height)
+            frame = CGRect(x: 0.0, y: -height - 1.0, width: width, height: height)
         }
         else if state == .animatingToStopped {
             height = actualContentOffsetY()
@@ -336,6 +338,8 @@ open class JFAnimatedRefresh: UIView {
         
         shapeLayer.frame = CGRect(x: 0.0, y: 0.0, width: width, height: height)
         shapeLayer.path = currentPath()
+        
+        layoutLoadingView()
     }
     
     fileprivate func startDisplayLink() {
@@ -348,7 +352,7 @@ open class JFAnimatedRefresh: UIView {
     
     fileprivate func animateBounce() {
         guard let scrollView = scrollView() else { return }
-        if !self.observing { return }
+        if !self.isObserving { return }
         
         resetScrollViewContentInset(shouldAddObserverWhenFinished: false, animated: false, completion: nil)
         

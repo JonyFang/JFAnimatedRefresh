@@ -16,6 +16,7 @@ public extension NSObject {
         guard jf_observers.index(where: {$0 == observerInfo}) == nil else {
             return
         }
+        jf_observers.append(observerInfo)
         addObserver(observer, forKeyPath: keyPath, options: .new, context: nil)
     }
     
@@ -49,8 +50,8 @@ public extension NSObject {
 }
 
 public extension UIView {
-    func jf_center(_ userPresentationLayerIfPossible: Bool) -> CGPoint {
-        guard userPresentationLayerIfPossible, let presentationLayer = layer.presentation() else {
+    func jf_center(_ usePresentationLayerIfPossible: Bool) -> CGPoint {
+        guard usePresentationLayerIfPossible, let presentationLayer = layer.presentation() else {
             return center
         }
         return presentationLayer.position
@@ -64,7 +65,7 @@ public extension UIGestureRecognizerState {
 }
 
 public extension UIScrollView {
-    //MARK: - Public
+    //MARK: - Public Methods
     public func jf_addPullToRefreshWithHandler(_ handler: @escaping () -> Void, loadingView: JFAnimatedRefreshLoadingView?) {
         isMultipleTouchEnabled = false
         panGestureRecognizer.maximumNumberOfTouches = 1
@@ -75,12 +76,12 @@ public extension UIScrollView {
         self.pullToRefreshView = pullToRefreshView
         addSubview(pullToRefreshView)
         
-        pullToRefreshView.observing = true
+        pullToRefreshView.isObserving = true
     }
     
     public func jf_removePullToRefresh() {
         pullToRefreshView?.disassociateDisplayLink()
-        pullToRefreshView?.observing = false
+        pullToRefreshView?.isObserving = false
         pullToRefreshView?.removeFromSuperview()
     }
     
@@ -96,7 +97,7 @@ public extension UIScrollView {
         pullToRefreshView?.stopLoading()
     }
     
-    //MARK: - Private
+    //MARK: - Private Methods
     fileprivate struct jf_associatedKeys {
         static var pullToRefreshView = "pullToRefreshView"
     }
