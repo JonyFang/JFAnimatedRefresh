@@ -25,21 +25,22 @@ open class JFAnimatedRefresh: UIView {
     //MARK: - Properties
     fileprivate var _state: JFAnimatedRefreshState = .stopped
     fileprivate var state: JFAnimatedRefreshState {
-        get {
-            return _state
-        }
+        get { return _state }
         set {
             let previousValue = state
             _state = newValue
             if previousValue == .dragging && newValue == .animatingBounce {
                 loadingView?.startAnimation()
-                //
+                animateBounce()
             }
             else if newValue == .loading && actionHandler != nil {
                 actionHandler()
             }
             else if newValue == .animatingToStopped {
-                //
+                resetScrollViewContentInset(shouldAddObserverWhenFinished: true, animated: true, completion: { 
+                    [weak self] () -> () in
+                    self?.state = .stopped
+                })
             }
             else if newValue == .stopped {
                 loadingView?.stopLoading()
@@ -56,7 +57,7 @@ open class JFAnimatedRefresh: UIView {
         }
     }
     
-    var actionHandler:(() -> Void)!
+    var actionHandler: (() -> Void)!
     fileprivate let shapeLayer = CAShapeLayer()
     fileprivate var displayLink: CADisplayLink!
     
@@ -225,7 +226,7 @@ open class JFAnimatedRefresh: UIView {
         contentInset.top = originalContentInsetTop
         
         if state == .animatingBounce {
-            contentInset.top += JFAnimatedRefreshConstants.LoadingContentInset
+            contentInset.top += currentHeight()
         }
         else if state == .loading {
             contentInset.top += JFAnimatedRefreshConstants.LoadingContentInset
